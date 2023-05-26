@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function prompts(){
         return $this->hasMany(Prompt::class);
     }
+
+    public function likes(){
+        return $this->belongsToMany(Prompt::class, 'likes', 'user_id', 'prompt_id');
+    }
 }

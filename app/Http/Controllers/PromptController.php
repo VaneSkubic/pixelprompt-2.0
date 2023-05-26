@@ -26,6 +26,15 @@ class PromptController extends Controller
         ]);
     }
 
+    public function showLikedPrompts(){
+        $prompts = auth()->user()->likes;
+
+        return view('prompts', [
+            'prompts' => $prompts,
+            'user' => auth()->user()
+        ]);
+    }
+
     public function store(){
         $data = request()->validate([
             'body' => 'required',
@@ -72,5 +81,18 @@ class PromptController extends Controller
         }
 
         return redirect()->route('prompts.showYourPrompts');
+    }
+
+    public function likes(){
+        $data = request()->validate([
+            'prompt_id' => 'required'
+        ]);
+
+        $prompt = Prompt::find($data['prompt_id']);
+        if($prompt->user_id != auth()->user()->id){
+            $prompt->likes()->toggle(auth()->user()->id);
+        }
+
+        return redirect()->back();
     }
 }

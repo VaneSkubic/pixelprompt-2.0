@@ -46,10 +46,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('prompts.index');
+    })->name('home');
     Route::get('prompts/all', [PromptController::class, 'index'])->name('prompts.index');
     Route::get('prompts/personal', [PromptController::class, 'showYourPrompts'])->name('prompts.showYourPrompts');
+    Route::get('prompts/liked', [PromptController::class, 'showLikedPrompts'])->name('prompts.showLikedPrompts');
     Route::post('prompts', [PromptController::class, 'store'])->name('prompts.store');
     Route::post('prompts/delete', [PromptController::class, 'delete'])->name('prompts.delete');
+    Route::post('prompts/update', [PromptController::class, 'update'])->name('prompts.update');
+    Route::post('prompts/like', [PromptController::class, 'likes'])->name('prompts.likes');
     Route::view('/about', 'about')->name('about');
 
     Route::get('email/verify/{id}/{hash}', EmailVerificationController::class)

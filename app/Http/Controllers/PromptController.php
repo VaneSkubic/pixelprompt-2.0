@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class PromptController extends Controller
 {
     public function index(){
-        $prompts = Prompt::all();
+
+        $prompts = Prompt::where('user_id', '!=', auth()->user()->id)->get();
 
         return view('prompts', [
             'prompts' => $prompts
@@ -39,6 +40,36 @@ class PromptController extends Controller
             'image' => $path,
             'user_id' => auth()->user()->id
         ]);
+
+        return redirect()->route('prompts.showYourPrompts');
+    }
+
+    public function delete(){
+        $data = request()->validate([
+            'prompt_id' => 'required'
+        ]);
+
+        $prompt = Prompt::find($data['prompt_id']);
+
+        if($prompt->user_id == auth()->user()->id){
+            $prompt->delete();
+        }
+
+        return redirect()->route('prompts.showYourPrompts');
+    }
+
+    public function update(){
+        $data = request()->validate([
+            'prompt_id' => 'required',
+            'body' => 'required'
+        ]);
+
+        $prompt = Prompt::find($data['prompt_id']);
+
+        if($prompt->user_id == auth()->user()->id){
+            $prompt->body = $data['body'];
+            $prompt->save();
+        }
 
         return redirect()->route('prompts.showYourPrompts');
     }

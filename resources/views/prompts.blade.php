@@ -146,7 +146,7 @@
                             <button type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-vertically-centered-scrollable-modal">
                                 Discard
                             </button>
-                            <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" href="#">
+                            <button type="submit" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                 Add
                             </button>
                         </div>
@@ -159,7 +159,7 @@
                 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($prompts as $prompt)
-                            <div class="w-60 hover:cursor-pointer transition-all hover:scale-105 flex w-min flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                            <div class="w-60 h-fit hover:shadow-lg hover:cursor-pointer transition-all flex w-min flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
                                 <img class="w-full h-auto rounded-t-xl" src="{{asset('storage/'.$prompt->image)}}" alt="Image Description">
                                 <div class="p-4 md:p-5">
                                     <p class="mt-1 text-gray-800 dark:text-gray-400">
@@ -174,6 +174,20 @@
                                         </p>
                                     </div>
                                 </div>
+                                @if($prompt->user_id == auth()->user()->id)
+                                    <div class="mt-auto flex border-t border-gray-200 divide-x divide-gray-200 dark:border-gray-700 dark:divide-gray-700">
+                                        <a class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-bl-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" href="#">
+                                            Edit
+                                        </a>
+                                        <form class="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-br-xl font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" action="{{route("prompts.delete")}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="prompt_id" value="{{$prompt->id}}">
+                                            <button type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
                             </div>
                         @endforeach
                     </div>

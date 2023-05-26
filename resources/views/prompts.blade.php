@@ -52,9 +52,16 @@
                             dark:bg-gray-900
                             dark:text-white
                         @endif">
-                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+{{--                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">--}}
+{{--                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>--}}
+{{--                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>--}}
+{{--                            </svg>--}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" >
+                                <symbol id="hpIconSymbol-like" viewBox="0 0 56 56" fill="currentColor"><path xmlns="http://www.w3.org/2000/svg" d="M 4.7265 20.6406 C 4.7265 30.6250 13.0937 40.4453 26.2890 48.8828 C 26.8046 49.1875 27.5078 49.5156 28.0000 49.5156 C 28.4922 49.5156 29.1953 49.1875 29.6875 48.8828 C 42.9062 40.4453 51.2735 30.6250 51.2735 20.6406 C 51.2735 12.3438 45.5781 6.4844 37.9843 6.4844 C 33.6250 6.4844 30.1094 8.5469 28.0000 11.7109 C 25.8906 8.5703 22.3515 6.4844 18.0156 6.4844 C 10.4219 6.4844 4.7265 12.3438 4.7265 20.6406 Z M 8.5000 20.6406 C 8.5000 14.4063 12.5312 10.2578 17.9687 10.2578 C 22.3750 10.2578 24.8828 13.0000 26.4062 15.3438 C 27.0390 16.2813 27.4375 16.5391 28.0000 16.5391 C 28.5625 16.5391 28.9141 16.2578 29.5937 15.3438 C 31.1875 13.0469 33.6484 10.2578 38.0312 10.2578 C 43.4687 10.2578 47.5000 14.4063 47.5000 20.6406 C 47.5000 29.3594 38.2890 38.7578 28.4687 45.2734 C 28.2343 45.4375 28.0937 45.5547 28.0000 45.5547 C 27.9062 45.5547 27.7422 45.4375 27.5078 45.2734 C 17.7109 38.7578 8.5000 29.3594 8.5000 20.6406 Z"></path></symbol>
+                                <g class="background">
+                                    <rect width="100%" height="100%" fill="none" rx="0%" ry="0%" x="0%" y="0%" stroke-width="0%" stroke="none"></rect>
+                                </g>
+                                <use xlink:href="#hpIconSymbol-like" class="content" fill="rgb(255, 255, 255)" transform-origin="center" ></use>
                             </svg>
                             Liked
                         </a>
@@ -119,7 +126,6 @@
                             Liked
                         </h1>
                         <p class="mt-2 text-lg text-gray-800 dark:text-gray-400">Check out the prompts that you liked.</p>
-
                     @endif
             </div>
 
@@ -187,9 +193,21 @@
                                     <button type="submit" class="absolute top-0 right-0 text-white rounded-tr-xl rounded-bl-xl p-2 bg-white dark:bg-gray-800">
 {{--                                        @dd(auth()->user()->likes)--}}
                                         @if(auth()->user()->likes->contains($prompt->id))
-                                            Unlike
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+                                                <symbol id="hpIconSymbol-unlike" viewBox="0 0 56 56"><path xmlns="http://www.w3.org/2000/svg" d="M 28.0000 49.5156 C 28.4922 49.5156 29.1953 49.1875 29.6875 48.8828 C 42.9765 40.5156 51.2735 30.6250 51.2735 20.6406 C 51.2735 12.3438 45.5781 6.4844 37.9843 6.4844 C 33.6250 6.4844 30.1094 9.0625 28.0000 13.0234 C 25.8906 9.0860 22.3515 6.4844 18.0156 6.4844 C 10.4219 6.4844 4.7265 12.3438 4.7265 20.6406 C 4.7265 30.6250 12.9531 40.6328 26.2890 48.8828 C 26.8046 49.1875 27.5078 49.5156 28.0000 49.5156 Z"></path></symbol>
+                                                <g class="background">
+                                                    <rect width="100%" height="100%" fill="none" rx="0%" ry="0%" x="0%" y="0%" stroke-width="0%" stroke="none"></rect>
+                                                </g>
+                                                <use xlink:href="#hpIconSymbol-unlike" class="content" fill="rgb(254, 74, 73)" transform-origin="center" style="transform: scale(0.8) rotate(0deg);"></use>
+                                            </svg>
                                         @else
-                                            Like
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+                                                <symbol id="hpIconSymbol-like" viewBox="0 0 56 56"><path xmlns="http://www.w3.org/2000/svg" d="M 4.7265 20.6406 C 4.7265 30.6250 13.0937 40.4453 26.2890 48.8828 C 26.8046 49.1875 27.5078 49.5156 28.0000 49.5156 C 28.4922 49.5156 29.1953 49.1875 29.6875 48.8828 C 42.9062 40.4453 51.2735 30.6250 51.2735 20.6406 C 51.2735 12.3438 45.5781 6.4844 37.9843 6.4844 C 33.6250 6.4844 30.1094 8.5469 28.0000 11.7109 C 25.8906 8.5703 22.3515 6.4844 18.0156 6.4844 C 10.4219 6.4844 4.7265 12.3438 4.7265 20.6406 Z M 8.5000 20.6406 C 8.5000 14.4063 12.5312 10.2578 17.9687 10.2578 C 22.3750 10.2578 24.8828 13.0000 26.4062 15.3438 C 27.0390 16.2813 27.4375 16.5391 28.0000 16.5391 C 28.5625 16.5391 28.9141 16.2578 29.5937 15.3438 C 31.1875 13.0469 33.6484 10.2578 38.0312 10.2578 C 43.4687 10.2578 47.5000 14.4063 47.5000 20.6406 C 47.5000 29.3594 38.2890 38.7578 28.4687 45.2734 C 28.2343 45.4375 28.0937 45.5547 28.0000 45.5547 C 27.9062 45.5547 27.7422 45.4375 27.5078 45.2734 C 17.7109 38.7578 8.5000 29.3594 8.5000 20.6406 Z"></path></symbol>
+                                                <g class="background">
+                                                    <rect width="100%" height="100%" fill="none" rx="0%" ry="0%" x="0%" y="0%" stroke-width="0%" stroke="none"></rect>
+                                                </g>
+                                                <use xlink:href="#hpIconSymbol-like" class="content" fill="rgb(254, 74, 73)" transform-origin="center" style="transform: scale(0.8) rotate(0deg);"></use>
+                                            </svg>
                                         @endif
                                     </button>
                                 </form>

@@ -34,6 +34,8 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
+USER $user
+
 RUN rm -rf vendor composer.lock
 RUN composer install
 RUN php artisan key:generate
@@ -41,5 +43,3 @@ RUN php artisan migrate:fresh --seed
 RUN npm install
 RUN npm run build
 RUN php artisan storage:link
-
-USER $user

@@ -31,15 +31,9 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-USER $user
-
-RUN rm -rf vendor composer.lock
-RUN composer install
-RUN php artisan key:generate
-RUN php artisan migrate:fresh --seed
-RUN npm install
-RUN npm run build
-RUN php artisan storage:link
-
 # Set working directory
 WORKDIR /var/www
+
+USER $user
+
+CMD bash -c "rm -rf vendor composer.lock && composer install && php artisan key:generate && php artisan migrate:fresh --seed && npm install && npm run build && php artisan storage:link"
